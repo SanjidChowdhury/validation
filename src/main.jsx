@@ -9,8 +9,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 	  <React.StrictMode>
 		<Routes>
 			<Route>
-				<Route path='/' element={<div>Welcome</div>}/>
-				<Route path="/form/:id" element={<App/>} />
+				<Route path='/validation/' element={<div>Welcome</div>}/>
+				<Route path="/validation/form/:id" element={<App/>} />
 				<Route path="/*" element={<div>404 Not found</div>}></Route>
 			</Route>
 		</Routes>

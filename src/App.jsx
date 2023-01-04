@@ -9,11 +9,10 @@ import axios from 'axios'
 function App() {
 	const [total, setTotal] = useState(25)
 	const [count, setCount] = useState(0) 
-	const [success, setSuccess] = useState(false)
 
 	let { id } = useParams()
 
-	const URL = 'http://localhost:3000'
+	const URL = 'https://validation-backend-imei.vercel.app/' 
 
 	const formRef = React.useRef('null')
 

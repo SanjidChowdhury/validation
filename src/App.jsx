@@ -12,7 +12,7 @@ function App() {
 
 	let { id } = useParams()
 
-	const URL = 'https://validation-backend-imei.vercel.app/' 
+	const URL = 'https://validation-backend-imei.vercel.app' 
 
 	const formRef = React.useRef('null')
 

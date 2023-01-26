@@ -3,10 +3,9 @@ import FormItem from './FormItem'
 import Status from './Status'
 import { useState } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 import Spinner from './Spinner'
 
-function Form({ handlers, count, setTotal, total, url, formRef, id }) { 
+function Form({ handlers, count, setTotal, total, url_info, formRef, id }) {
 	// let { id } = useParams()
 
 	const [data, setData] = useState([])
@@ -15,17 +14,23 @@ function Form({ handlers, count, setTotal, total, url, formRef, id }) {
 
 	React.useEffect(() => {
 		setLoading(true)
-		axios.get(`${url}/data?id=${id}`)
-			.then(res => {
-				setData(res.data)
-				setTotal(res.data.length)  
-			})
+		// axios post with headers
+		const config = {
+			headers: {
+				'X-Parse-Application-Id': url_info.APP_ID,
+				'X-Parse-REST-API-Key': url_info.API_KEY, 
+			}
+		}
+		// post with headers
+		axios.post(`${url_info.URL}/data?id=${id}`, {}, config).then(res => {
+			setData(res.data.result.data)
+			setOptions(res.data.result.choices) 
+			setTotal(res.data.result.data.length) 
+		}).catch(err => {
+			console.log(err); 
+		})  
 
-		axios.get(`${url}/choices`).then(res => {
-			setOptions(res.data)
-		})
-
-	}, [total])
+	}, [total]) 
 
 	React.useEffect(() => {
 		if (data.length > 0) {
